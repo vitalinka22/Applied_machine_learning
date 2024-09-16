@@ -1,115 +1,47 @@
-# K-Means Clustering Algorithm
+# K-means Clustering
 
-This repository implements a custom K-Means clustering algorithm from scratch using NumPy, as well as a comparison with the `sklearn` K-Means implementation. It includes core functions such as centroid initialization, cluster assignment, centroid updates, and convergence checks. Additionally, it features plotting capabilities to visualize the clustering results.
+## Overview
 
-## Features
-
-- **Custom K-Means Implementation:**
-  - Cluster assignment using L1 or L2 norms.
-  - Centroid updates using mean (L2) or median (L1).
-  - Detects and relocates empty clusters.
-  - Convergence criterion based on cluster assignment changes.
-  - Handles clusters of arbitrary dimensionality.
-  
-- **Visualization:**
-  - Plots clusters with their centroids.
-  - Comparisons between custom and `sklearn` K-Means results.
+This project implements the K-means clustering algorithm using NumPy, along with utility functions for evaluating clustering performance and visualizing results.
 
 ## Files
 
-- `main.py`: The main script containing the K-Means clustering implementation and an example usage with a test dataset.
-- `utils_clustering.py`: Utility functions such as centroid initialization, plotting, and auxiliary methods like `sse`, `bss`, and `find_farthest_point`.
-- `example_data_Kmeans.csv`: A dataset for testing and visualizing the K-Means algorithm.
-  
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your_username/kmeans_clustering.git
-   cd kmeans_clustering
-   ```
-
-2. Install required dependencies:
-   ```bash
-   pip install numpy matplotlib scikit-learn
-   ```
+- `kmeans/main.py`: Main script to run K-means clustering. Includes functions for clustering, centroid updates, and convergence checking.
+- `kmeans/utils_clustering.py`: Utility functions for clustering evaluation (SSE, BSS), centroid initialization, and plotting.
+- `kmeans/example_data_Kmeans.csv`: Example dataset for clustering experiments.
 
 ## Usage
 
-To run the K-Means clustering algorithm with a sample dataset, use the following steps:
+1. **Run the Main Script**
 
-1. **Run the main script**:
+   Execute the main script to test K-means clustering:
+
    ```bash
-   python main.py
+   python kmeans/main.py
    ```
 
    This will:
-   - Load a test dataset `x` and apply both the custom K-Means implementation and the `sklearn` K-Means implementation.
-   - Plot the clustering results.
-   - Print out the updated labels and centroid positions after clustering.
+   - Load and plot example data.
+   - Run K-means clustering on the data.
+   - Compare results with scikit-learn's KMeans.
+   - Display clustering results and evaluation metrics.
 
-2. **Customize Parameters**:
-   You can modify the `kmeans_clustering()` function in the `main.py` script to experiment with different norms (`L1`, `L2`), initial centroids, or datasets.
+2. **Functions**
 
-### Example Workflow:
+   - `assign_cluster(x, centroids, norm='L2')`: Assigns data points to clusters based on the nearest centroid.
+   - `update_centroids(x, labels, K, norm='L2')`: Updates centroid positions.
+   - `is_converged(centroids, labels)`: Checks if the algorithm has converged.
+   - `kmeans_clustering(x, K, norm='L2', init_centroids=None)`: Performs K-means clustering.
 
-```python
-from main import kmeans_clustering
+3. **Utilities**
 
-# Define data points
-x = np.array([[1, 9], [2, 7], [3, 8], [4, 3], [5, 2], [7, 2], [8, 4], [6, 4], [10, 11], [10, 9], [8, 11], [12, 9]])
+   - `sse(x, centroids, labels, norm='L2')`: Computes Sum of Squared Errors.
+   - `bss(x, centroids, norm='L2')`: Computes Between-cluster Sum of Squares.
+   - `plot_clusters(x, labels=None, centroids=None)`: Plots clusters and centroids.
 
-# Run the K-Means clustering
-labels, centroids, cost = kmeans_clustering(x=x, K=3, norm='L2')
+## Requirements
 
-# Plot the results
-plot_clusters(x=x, labels=labels, centroids=centroids)
-```
+- NumPy
+- Matplotlib
+- scikit-learn (for comparison)
 
-## Function Descriptions
-
-### Core Functions
-
-- **`assign_cluster()`**: 
-  - Assigns data points to the nearest cluster centroid based on the specified norm (L1 or L2).
-  
-- **`update_centroids()`**: 
-  - Recomputes centroids based on the current cluster assignments, using either the mean (L2) or median (L1).
-  
-- **`is_converged()`**: 
-  - Checks if the K-Means algorithm has converged by monitoring changes in cluster assignments over iterations.
-
-- **`kmeans_clustering()`**: 
-  - The main K-Means loop that updates cluster assignments and centroids until convergence or a maximum iteration limit is reached.
-
-- **`relocate_empty_centroid()`**: 
-  - Handles the case where a cluster becomes empty by relocating the centroid far away from existing ones.
-
-### Utility Functions (from `utils_clustering.py`)
-
-- **`pick_random_points()`**: Randomly selects `K` points from the dataset to initialize centroids.
-- **`sse()`**: Computes the sum of squared errors (inertia) for cluster evaluation.
-- **`bss()`**: Computes the between-cluster sum of squares.
-- **`find_farthest_point()`**: Finds the point in the dataset farthest from existing centroids.
-- **`plot_clusters()`**: Plots clusters with their centroids.
-
-## Testing with Sklearn
-
-The repository also includes a comparison with the `sklearn` implementation of K-Means:
-
-```python
-from sklearn.cluster import KMeans
-
-kmeans = KMeans(n_clusters=3, random_state=0).fit(data)
-labels_sklearn = kmeans.labels_
-centroids_sklearn = kmeans.cluster_centers_
-
-plot_clusters(x=data, centroids=centroids_sklearn, labels=labels_sklearn)
-```
-
-## Visualizing Results
-
-The code provides several visualizations to help understand the clustering process, including:
-- Raw data without clustering
-- Clustered data points with their respective centroids
-- A comparison of custom K-Means vs. `sklearn` K-Means
