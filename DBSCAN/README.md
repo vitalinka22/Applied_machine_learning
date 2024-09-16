@@ -1,7 +1,3 @@
-
-```markdown
-# Machine Learning for Engineering Applications
-
 ## Overview
 
 This repository contains implementations and resources for a machine learning module focused on engineering applications. The project covers data exploration, clustering, and normalization using Python. Key libraries include NumPy, scikit-learn, and Matplotlib.
@@ -75,9 +71,14 @@ Additionally, a custom Z-score normalization class is provided for data preproce
    python zscorer.py
    ```
 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
 - NumPy
 - Matplotlib
 - scikit-learn
+
+```
