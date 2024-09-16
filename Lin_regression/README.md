@@ -1,70 +1,47 @@
-# Linear Regression for Driving Data Analysis
+# Linear Regression Analysis
 
 ## Overview
 
-This repository provides implementations and resources for performing linear regression analysis on driving data. The project demonstrates how to use linear regression to model and analyze the relationship between driving velocity and engine power, including wind resistance and rolling resistance.
+This project demonstrates linear regression using NumPy to model driving power data, specifically focusing on calculating rolling resistance.
 
-## Project Description
+## Files
 
-The project involves two main tasks:
-
-1. **Linear Regression on Synthetic Data**: Implements a basic linear regression model on synthetic data to demonstrate how to fit a linear model and visualize the results.
-2. **Driving Data Analysis**: Analyzes real driving data to estimate rolling resistance. The analysis includes:
-   - Loading and visualizing the driving data.
-   - Subtracting wind resistance from the engine power.
-   - Estimating rolling resistance using linear regression.
-
-## Files and Scripts
-
-### 1. Linear Regression on Synthetic Data
-
-- **File**: `linear_regression_synthetic.py`
-- **Description**: This script performs:
-  - Linear regression on synthetic data.
-  - Visualizes the data and the linear fit.
-  - Prints the estimated parameters of the linear model.
-
-### 2. Driving Data Analysis
-
-- **File**: `driving_data_analysis.py`
-- **Description**: This script performs:
-  - Loading and visualizing real driving data from `driving_data.csv`.
-  - Subtracting wind resistance from the engine power.
-  - Estimating rolling resistance using linear regression.
-  - Visualizing the rolling resistance and the linear fit.
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Linear-Regression-Driving-Data.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Linear-Regression-Driving-Data
-   ```
-3. Install the required packages:
-   ```bash
-   pip install numpy matplotlib scikit-learn
-   ```
+- `lin_regress.py`: Implements linear regression and evaluates driving power data.
+- `driving_data.csv`: Dataset for analyzing driving power.
 
 ## Usage
 
-1. **Run linear regression on synthetic data**:
+1. **Run Linear Regression**
+
+   Execute the script to perform linear regression on the example data:
+
    ```bash
-   python linear_regression_synthetic.py
+   python lin_regress.py
    ```
 
-2. **Run driving data analysis**:
-   ```bash
-   python driving_data_analysis.py
-   ```
+   This script:
+   - Performs linear regression to model driving power.
+   - Visualizes data and regression results.
 
-Ensure that the file `driving_data.csv` is in the same directory as the script or update the file path in the script accordingly.
+2. **Key Functions**
 
+   - `lin_regress(x: np.array, y: np.array) -> tuple[float, float]`: Performs linear regression and returns coefficients.
+   - `wind_resistance(v: np.ndarray) -> np.ndarray`: Calculates wind resistance force.
+   
+3. **Steps in the Script**
 
-## Acknowledgements
+   - **Data Preparation**: Load and preprocess the driving data.
+   - **Plot Data**: Visualize initial driving power vs. velocity.
+   - **Calculate Rolling Resistance**: Subtract wind resistance and plot power without wind.
+   - **Linear Regression**: Fit a linear model to estimate rolling resistance.
+
+4. **Results**
+
+   - **Model**: Displays linear regression results.
+   - **Plots**: Visualizes the relationship between velocity, power, and rolling resistance.
+
+## Requirements
 
 - NumPy
 - Matplotlib
-- scikit-learn
+- scikit-learn (for advanced use)
